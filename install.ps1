@@ -1,9 +1,9 @@
 [CmdletBinding(SupportsShouldProcess)]
 param(
-    [ValidatePattern('^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$')][string]$Repository,
-    [ValidatePattern('^[A-Za-z0-9_.-]+$')][string]$Version,
+    [ValidatePattern('^$|^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$')][string]$Repository,
+    [ValidatePattern('^$|^[A-Za-z0-9_.-]+$')][string]$Version,
     [string]$InstallerPath,
-    [ValidatePattern('^[a-fA-F0-9]{64}$')][string]$Sha256,
+    [ValidatePattern('^$|^[a-fA-F0-9]{64}$')][string]$Sha256,
     [switch]$NoLaunch,
     [switch]$CheckOnly
 )
