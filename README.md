@@ -22,7 +22,7 @@
 
 You do **not** need Python installed. Choose either of the two easy methods below:
 
-### Option 1: One-Line PowerShell Command (Recommended)
+### Option 1: PowerShell Install (Recommended)
 Open **PowerShell** and run:
 
 ```powershell
