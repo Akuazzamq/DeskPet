@@ -56,7 +56,9 @@ try {
     Write-Host '[2/3] Verifying SHA-256...' -ForegroundColor Cyan
     if ((Get-FileHash -LiteralPath $InstallerPath -Algorithm SHA256).Hash -ne $Sha256) { throw 'Checksum mismatch. Installation cancelled.' }
     if ($CheckOnly) { Write-Host 'Package verified. Check-only mode: nothing installed.' -ForegroundColor Green; return }
-    if ($PSCmdlet.ShouldProcess('Current Windows user', 'Install DeskPet and create shortcuts')) {
+    # Invoke-Expression does not provide a script-level PSCmdlet; direct execution does.
+    $shouldInstall = if ($null -ne $PSCmdlet) { $PSCmdlet.ShouldProcess('Current Windows user', 'Install DeskPet and create shortcuts') } else { $true }
+    if ($shouldInstall) {
         Write-Host '[3/3] Installing DeskPet...' -ForegroundColor Cyan
         $installerLog = Join-Path ([IO.Path]::GetTempPath()) 'DeskPet-install.log'
         $arguments = @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-','/TASKS=desktopicon',('/LOG="' + $installerLog + '"'))
