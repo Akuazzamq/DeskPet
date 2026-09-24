@@ -46,7 +46,8 @@ try {
         New-Item -ItemType Directory -Path $downloadFolder | Out-Null
         $InstallerPath = Join-Path $downloadFolder 'DeskPet-Setup.exe'
         Invoke-WebRequest -UseBasicParsing -Uri $asset[0].browser_download_url -OutFile $InstallerPath
-        $manifest = (Invoke-WebRequest -UseBasicParsing -Uri $checksums[0].browser_download_url).Content
+        $rawManifest = (Invoke-WebRequest -UseBasicParsing -Uri $checksums[0].browser_download_url).Content
+        $manifest = if ($rawManifest -is [byte[]]) { [System.Text.Encoding]::UTF8.GetString($rawManifest) } else { [string]$rawManifest }
         $match = [regex]::Match($manifest, '(?im)^([a-f0-9]{64})\s+\*?DeskPet-Setup\.exe\s*$')
         if (-not $match.Success) { throw 'Installer checksum missing from release manifest.' }
         $Sha256 = $match.Groups[1].Value
