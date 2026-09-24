@@ -26,7 +26,9 @@ You do **not** need Python installed. Choose either of the two easy methods belo
 Open **PowerShell** and run:
 
 ```powershell
-irm https://raw.githubusercontent.com/Akuazzamq/DeskPet/main/install.ps1 | iex
+$installer = Join-Path $env:TEMP 'DeskPet-install.ps1'
+Invoke-WebRequest https://raw.githubusercontent.com/Akuazzamq/DeskPet/main/install.ps1 -OutFile $installer
+& $installer
 ```
 
 *(This automatically downloads the latest verified release, validates the SHA-256 hash, creates Desktop & Start Menu shortcuts, and launches DeskPet!)*
