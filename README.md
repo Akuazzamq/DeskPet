@@ -129,5 +129,5 @@ See the full [End User License Agreement (LICENSE)](LICENSE) for details.
 ---
 
 <div align="center">
-Made with ❤️ by <b>AzzamQ</b> · Pixel Companions
+Made with ❤️ by <b>Akuazzamq</b> · Pixel Companions
 </div>
